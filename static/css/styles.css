@@ -1,0 +1,52 @@
+.top-heading {
+    padding-top: 10%;
+}
+.one {
+    margin-left: 10%;
+}
+.register-login-form {
+    padding-top: 10%;
+}
+.register-login-img {
+    height: 100%;
+    width: 60%;
+}
+.flashes {
+    list-style-type: none;
+    color: red;
+}
+footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;
+   background:#6cf;
+}
+@media (max-width: 1163px) {
+    .one {
+        padding: 5% 2%;
+    }
+    .tital-one {
+        font-size: 30px;
+    }
+    .tital-two {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 896px) {
+     .one {
+        padding-top: 5%;
+        margin-left: 2%;
+    }
+    .tital-one {
+        font-size: 23px;
+    }
+    .todolistimg {
+        height: 100%;
+        width: 100%;
+    }
+    .register-login-img {
+        width: 100%;
+    }
+}

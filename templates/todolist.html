@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %} Tasks {% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-5 text-center"> Hello, {{ user.username }} </h1>
+        <h3 class="mb-5 text-center"> Make a List of Work and Start Your Productive Day.</h3>
+        <table class="table">
+            <thead>
+                <th scope="col" class="h4"">#</th>
+                <th scope="col" class="h4">Due Date</th>
+                <th scope="col" class="h4">Tasks</th>
+                <th scope="col" class="h4"></th>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td></td>
+                    <td class="fs-5">Learn new Thing</td>
+                    <td class="text-center"><button class="btn btn-outline-danger">Remove</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <form action="{{ url_for('home') }}" method="POST">
+            <div class="input-group mb-3">
+                <div>
+                    <input class="form-control" name="due_date" type="date">
+                </div>
+                <input type="text" class="form-control" name="add_new_task" placeholder="add new task" aria-label="Task" aria-describedby="button-addon2">
+                <button class="btn btn-outline-primary" name="add" type="submit" id="button-addon2">Add</button>
+            </div>
+        </form>
+    </div>
+{% endblock body %}

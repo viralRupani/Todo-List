@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block title %} Login {% endblock title %}
+
+{% block body %}
+   <div class="container row register-login-form">
+        <div class="col-6 text-center">
+            <img class="register-login-img" src="{{ url_for('static', filename='images/login.jpg') }}">
+        </div>
+        <div class="col-6">
+            {% with messages = get_flashed_messages() %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endwith %}
+            <form class="form form-horizontal" method="post" role="form" action="{{ url_for('login') }}">
+                <h1>Login</h1>
+                {{ csrf_token }}
+                {{ form.hidden_tag() }}
+                {{ wtf.form_errors(form, hiddens="only") }}
+
+                {{ wtf.form_field(form.email) }}
+                {{ wtf.form_field(form.password) }}
+                <button class="mt-2 btn btn-outline-primary">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock body %}
