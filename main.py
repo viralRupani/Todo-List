@@ -103,7 +103,6 @@ def register():
                     )
                     db.session.add(new_user)
                     db.session.commit()
-                    login_user(new_user)
                     return redirect(url_for('login'))
                 else:
                     flash('Password Field Does not Match!')
