@@ -37,6 +37,7 @@ class Todo(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     todo_user = relationship('User', back_populates='todos')
     todo_ = db.Column(db.String(50), nullable=False)
+    todo_status = db.Column(db.String(10), nullable=False)
     due_date = db.Column(db.String(12))
 
 
@@ -50,7 +51,8 @@ def home():
             new_todo = Todo(
                 user_id=current_user.id,
                 todo_=request.form.get('add_new_task'),
-                due_date=request.form.get('due_date')
+                due_date=request.form.get('due_date'),
+                todo_status="remaining"
             )
             db.session.add(new_todo)
             db.session.commit()
@@ -74,9 +76,13 @@ def remove_todo(todo_id):
     return redirect(url_for('home'))
 
 
-# @app.route('/new_user')
-# def new_user():
-#     return render_template('index.html')
+@app.route('/complete-todo/<todo_id>', methods=['PATCH', 'GET'])
+def complete_todo(todo_id):
+    todo_to_complete = Todo.query.filter_by(id=todo_id).first()
+    if todo_to_complete:
+        todo_to_complete.todo_status = "completed"
+        db.session.commit()
+        return redirect(url_for('home'))
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -126,6 +132,11 @@ def login():
             return redirect(url_for('home'))
         else:
             return render_template('login.html', form=login_form)
+
+
+@app.route('/about-us')
+def about():
+    return render_template('about.html')
 
 
 @app.route('/logout')

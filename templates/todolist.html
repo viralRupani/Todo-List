@@ -7,32 +7,57 @@
     <div class="container">
         <h1 class="mt-5 text-center"> Hello, {{ user.username }} </h1>
         <h3 class="mb-5 text-center"> Make a List of Work and Start Your Productive Day.</h3>
+        <form action="{{ url_for('home') }}" method="POST">
+            <div class="input-group mb-3">
+                <div>
+                    <input class="form-control" name="due_date" type="date">
+                </div>
+                <input type="text" class="form-control" name="add_new_task" placeholder="Add new Task" aria-label="Task" aria-describedby="button-addon2">
+                <button class="btn btn-outline-primary" name="add" type="submit" id="button-addon2">Add</button>
+            </div>
+        </form>
         <table class="table">
             <thead>
-                <th scope="col" class="h4"">#</th>
+                <th scope="col" class="h4">#</th>
                 <th scope="col" class="h4">Due Date</th>
                 <th scope="col" class="h4">Tasks</th>
                 <th scope="col" class="h4"></th>
             </thead>
             <tbody>
                 {% for todo in todos: %}
+                    {% if todo.todo_status == "remaining" %}
                     <tr>
                         <th scope="row">{{ loop.index }}</th>
                         <td>{{ todo.due_date }}</td>
                         <td class="fs-5">{{ todo.todo_ }}</td>
-                        <td class="text-center"><a href="{{ url_for('remove_todo', todo_id = todo.id) }}"><button class="btn btn-outline-danger">Remove</button></a></td>
+                        <td class="text-center">
+                            <a href="{{ url_for('complete_todo', todo_id = todo.id) }}"><i class="fa-solid fa-check btn btn-outline-success"></i></a>
+                            <a href="{{ url_for('remove_todo', todo_id = todo.id) }}"><i class="fa-solid fa-xmark btn btn-outline-danger"></i></a>
+                        </td>
                     </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
-        <form action="{{ url_for('home') }}" method="POST">
-            <div class="input-group mb-3">
-                <div>
-                    <input class="form-control" name="due_date" type="date">
-                </div>
-                <input type="text" class="form-control" name="add_new_task" placeholder="add new task" aria-label="Task" aria-describedby="button-addon2">
-                <button class="btn btn-outline-primary" name="add" type="submit" id="button-addon2">Add</button>
-            </div>
-        </form>
+        <h4 class="mt-5">Completed Todos</h4>
+        <table class="table">
+            <thead>
+                <th scope="col" class="h4">#</th>
+                <th scope="col" class="h4">Tasks</th>
+                <th scope="col" class="h4"></th>
+            </thead>
+            <tbody>
+                {% for todo in todos: %}
+                    {% if todo.todo_status == "completed" %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td class="fs-5" style="color: green">{{ todo.todo_ }}</td>
+                        <td class="text-center"><a href="{{ url_for('remove_todo', todo_id = todo.id) }}"><i class="fa-solid fa-xmark btn btn btn-outline-secondary"></i></a></td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('logout') }}"><button class="btn btn-outline-danger">Logout</button></a>
     </div>
 {% endblock body %}
