@@ -59,12 +59,24 @@ def home():
             flash('Please Login before make Todo')
             return redirect(url_for('login'))
     else:
-        return render_template('todolist.html', user=current_user)
+        if current_user.is_authenticated:
+            todos = Todo.query.filter_by(user_id=current_user.id).all()
+            return render_template('todolist.html', user=current_user, todos=todos)
+        else:
+            return render_template('index.html')
 
 
-@app.route('/new_user')
-def new_user():
-    return render_template('index.html')
+@app.route('/remove-todo/<todo_id>')
+def remove_todo(todo_id):
+    todo_to_delete = Todo.query.filter_by(id=todo_id).first()
+    db.session.delete(todo_to_delete)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+
+# @app.route('/new_user')
+# def new_user():
+#     return render_template('index.html')
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -92,7 +104,10 @@ def register():
             flash('User already Exist with this email Login Instead')
             return redirect(url_for('register'))
     else:
-        return render_template('register.html', form=register_form)
+        if current_user.is_authenticated:
+            return redirect(url_for('home'))
+        else:
+            return render_template('register.html', form=register_form)
 
 
 @app.route('/login', methods=["POST", "GET"])
@@ -107,13 +122,16 @@ def login():
             flash('Credentials Wrond!')
             return redirect(url_for('login'))
     else:
-        return render_template('login.html', form=login_form)
+        if current_user.is_authenticated:
+            return redirect(url_for('home'))
+        else:
+            return render_template('login.html', form=login_form)
 
 
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('new_user'))
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
