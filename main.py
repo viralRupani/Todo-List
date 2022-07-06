@@ -92,21 +92,26 @@ def register():
     if register_form.validate_on_submit():
         user = User.query.filter_by(email=register_form.email.data).first()
         if not user:
-            if register_form.password.data == register_form.re_password.data:
-                new_user = User(
-                    username=register_form.username.data,
-                    email=register_form.email.data,
-                    password=generate_password_hash(password=register_form.password.data,
-                                                    method="pbkdf2:sha256",
-                                                    salt_length=8)
-                )
-                db.session.add(new_user)
-                db.session.commit()
-                login_user(new_user)
-                return redirect(url_for('login'))
+            if 8 <= len(register_form.password.data) <= 15:
+                if register_form.password.data == register_form.re_password.data:
+                    new_user = User(
+                        username=register_form.username.data,
+                        email=register_form.email.data,
+                        password=generate_password_hash(password=register_form.password.data,
+                                                        method="pbkdf2:sha256",
+                                                        salt_length=8)
+                    )
+                    db.session.add(new_user)
+                    db.session.commit()
+                    login_user(new_user)
+                    return redirect(url_for('login'))
+                else:
+                    flash('Password Field Does not Match!')
+                    return redirect(url_for('register'))
             else:
-                flash('Password Field Does not Match!')
+                flash('Password Length should be between 8-15 characters!')
                 return redirect(url_for('register'))
+
         else:
             flash('User already Exist with this email Login Instead')
             return redirect(url_for('register'))
