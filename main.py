@@ -127,7 +127,7 @@ def login():
     if login_form.validate_on_submit():
         user = User.query.filter_by(email=login_form.email.data).first()
         if user and check_password_hash(pwhash=user.password, password=login_form.password.data):
-            login_user(user)
+            login_user(user, remember=True)
             return redirect(url_for('home'))
         else:
             flash('Credentials Wrond!')
