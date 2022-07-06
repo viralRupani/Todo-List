@@ -15,12 +15,14 @@
                 <th scope="col" class="h4"></th>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td class="fs-5">Learn new Thing</td>
-                    <td class="text-center"><button class="btn btn-outline-danger">Remove</button></td>
-                </tr>
+                {% for todo in todos: %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ todo.due_date }}</td>
+                        <td class="fs-5">{{ todo.todo_ }}</td>
+                        <td class="text-center"><a href="{{ url_for('remove_todo', todo_id = todo.id) }}"><button class="btn btn-outline-danger">Remove</button></a></td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
         <form action="{{ url_for('home') }}" method="POST">
