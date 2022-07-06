@@ -18,7 +18,7 @@ build/
 docs/_build/
 .vscode
 
-todolist-database.db
+*.db
 
 # Coverage reports
 htmlcov/
