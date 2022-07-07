@@ -4,8 +4,6 @@ Lots of task management systems and to-do apps exist but they tend to be bloated
 ```commandline
 Checkout Here: https://flask-todolists.herokuapp.com/
 ```
-<b><i>Not Responsive Yet But Lot to Update in Future</i></b>
-
 ## Screenshots
 
 <img src="static/images/readme1.png">
