@@ -11,6 +11,11 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace('s://', 'sql://')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+
+# Local host configuration
+# app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////todolist-database.db"
+# app.config['SECRET_KEY'] = "Secret key"
+
 db = SQLAlchemy(app)
 Bootstrap(app)
 
@@ -151,4 +156,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
