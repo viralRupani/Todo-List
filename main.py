@@ -33,8 +33,8 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(10), nullable=False)
-    email = db.Column(db.String(20), nullable=False)
-    password = db.Column(db.String(250), nullable=False)
+    email = db.Column(db.String(30), nullable=False)
+    password = db.Column(db.String(500), nullable=False)
     todos = relationship('Todo', back_populates='todo_user')
 
 
