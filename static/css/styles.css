@@ -7,16 +7,20 @@
 }
 
 .one {
-    margin-left: 10%;
+    margin-left: 16%;
 }
+/*
+.todolistimg {
+    margin-bottom: 100px;
+} */
 
 .register-login-form {
-    padding-top: 10%;
+    padding-top: 1%;
 }
 
 .register-login-img {
-    height: 100%;
-    width: 60%;
+    height: 30%;
+    width: 30%;
 }
 
 .about-img {
@@ -54,7 +58,6 @@ footer {
     width: 30px;
     color: white;
     }
-
 @media (max-width: 1163px) {
     .one {
         padding: 5% 2%;
@@ -75,10 +78,11 @@ footer {
     .tital-one {
         font-size: 23px;
     }
+    /*
     .todolistimg {
         height: 100%;
         width: 100%;
-    }
+    } */
     footer {
         height: 240px;
        }

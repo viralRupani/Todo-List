@@ -4,11 +4,11 @@
 {% block title %} Register {% endblock title %}
 
 {% block body %}
-    <div class="container row register-login-form">
-        <div class="col-6 text-center">
+    <div class="container register-login-form">
+        <div class=" text-center">
             <img class="register-login-img" src="{{ url_for('static', filename='images/register.png') }}">
         </div>
-        <div class="col-6">
+        <div class="mx-5 pb-5">
             {% with messages = get_flashed_messages() %}
                 <ul class="flashes">
                     {% for message in messages %}
